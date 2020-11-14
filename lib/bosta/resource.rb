@@ -15,14 +15,22 @@ module Bosta
                 }
               )
               
-              raise "Not Existed Method" unless conn.respond_to? method
+            raise "Not Existed Method" unless conn.respond_to? method
 
-              fullPath = "#{Bosta.baseUrl}/api/v0/#{path}"
+            fullPath = "#{Bosta.baseUrl}/api/v1/#{path}"
 
-              resp = conn.public_send(method, fullPath) do |req|
-                req.params = params
-                req.body = body.to_json
-              end
+            res = conn.public_send(method, fullPath) do |req|
+            req.params = params
+            req.body = body.to_json
+            end
+            res = JSON.parse(res.body)
+
+            return res['data'] || res['message'] if res['success']
+            #if not Success
+            raise res['message']
+
+            rescue
+                raise
         end
         
     end
