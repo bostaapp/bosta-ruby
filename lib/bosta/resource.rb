@@ -20,8 +20,8 @@ module Bosta
             fullPath = "#{Bosta.baseUrl}/api/v1/#{path}"
 
             res = conn.public_send(method, fullPath) do |req|
-            req.params = params
-            req.body = body.to_json
+                req.params = params
+                req.body = body.to_json
             end
             res = JSON.parse(res.body)
 

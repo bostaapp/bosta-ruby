@@ -1,12 +1,12 @@
-require('./BostaObject.rb')
+module Bosta
+    class ContactPerson < BostaObject
+        attr_accessor :name, :phone, :email
+        def initialize(name, phone, email = nil)
+            @name = name
+            @phone = phone
+            @email = email
 
-class ContactPerson < BostaObject
-    attr_accessor :name, :phone, :email
-    def initialize(name, phone, email)
-        @name = name
-        @phone = phone
-        @email = email
-
-        checkRequiredFields('name', 'phone')
+            checkRequiredFields('name', 'phone')
+        end
     end
 end
