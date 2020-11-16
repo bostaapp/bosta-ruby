@@ -10,6 +10,7 @@ module Bosta
         get_key :baseUrl
       end
   
+      private
       def get_key(key)
         instance_variable_get("@#{key}") || raise("Set Bosta.#{key} to use this feature")
       end

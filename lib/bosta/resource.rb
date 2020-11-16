@@ -1,7 +1,7 @@
 require 'faraday'
 require 'json'
 
-module Bosta
+module Bosta #:nodoc: all
     class Resource
 
         def self.send(method, path, body = {}, params = {})

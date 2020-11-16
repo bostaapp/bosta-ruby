@@ -1,4 +1,4 @@
-module Bosta
+module Bosta #:nodoc: all
     class BostaObject
         def initialize
             raise 'This is an abstract class'
