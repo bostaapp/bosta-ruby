@@ -14,18 +14,17 @@ module Bosta
 
         def self.create(packageType, cod, receiver, address, specs=nil, businessReference=nil, webhookUrl=nil, notes=nil)
             deliveryHash = Delivery::formatParams(packageType, cod, receiver, address, specs, businessReference, webhookUrl, notes)
-            puts deliveryHash
             Bosta::Resource.send('post', 'deliveries', deliveryHash)
         end
 
         #=== Edit delivery data
         #* +deliveryId+
         #* +cod+ (optional) the cash on delivery (number)
-        #* +address+ should be of type Address
+        #* +address+ (optional) should be of type Address
         #* +receiver+ (optional) should be of type Receiver
         #* +businessReference+ (optional) String
         #* +webhookUrl+ (optional) String url
-        #* +notes+ String
+        #* +notes+ (optional) String
         #
 
         def self.update(deliveryId, cod=nil, address= nil, receiver = nil, businessReference=nil, webhookUrl=nil, notes=nil)
@@ -66,7 +65,7 @@ module Bosta
         end
 
         #
-        #* Cancel the shipment +deliveryId+
+        #* Terminate the shipment +deliveryId+
         #
 
         def self.terminateDelivery(deliveryId)

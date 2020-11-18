@@ -18,7 +18,7 @@ gem install bosta
 ```bash
 require('bosta');
 
-Bosta.apikey= ENV['API_KEY']
+Bosta.apiKey= ENV['API_KEY']
 Bosta.baseUrl= ENV['BASE_URL']
 ```
 
@@ -79,7 +79,7 @@ Bosta::Delivery.terminateDelivery(deliveryId);
 ###### get your pickup location
 ```bash
 pickupLocations = Bosta::Pickup.getPickupLocations();
-businessLocationId = pickupLocations[0]['_id'];
+businessLocationId = pickupLocations["pickupLocations"][0]['_id'];
 ```
 ###### create pickup
 ```bash
