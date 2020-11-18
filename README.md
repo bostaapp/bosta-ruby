@@ -43,7 +43,7 @@ pickupTimeSlots_2 = Bosta::TIME_SLOT_13_TO_16;
 ```bash
 receiver1 = Bosta::Receiver.new('Ahmad Mohamad', '01029394959').getFormattedObj
 address1 = Bosta::Address.new('EG-01', 'address firstline').getFormattedObj
-type = Bosta::DELIVERY_TYPES[:SEND][:code]
+type = Bosta::DELIVERY_TYPES[:SEND]
 spec = Bosta::Specs.new(Bosta::DELIVERY_SIZES[:SMALL]).getFormattedObj
 createdDelivery = Bosta::Delivery.create(type, 100, receiver1, address1,  spec)
 
@@ -52,27 +52,27 @@ trackingNumber = createdDelivery['trackingNumber'];
 ```
 ###### update shipment by id
 ```bash
-updatedDeliver = Bosta.Delivery.update(deliveryId, cod=nil, dropOffAddress= nil, receiver = nil, pickupAddress=nil, businessReference=nil, webhookUrl=nil, notes=nil);
+updatedDeliver = Bosta::Delivery.update(deliveryId, cod=nil, dropOffAddress= nil, receiver = nil, pickupAddress=nil, businessReference=nil, webhookUrl=nil, notes=nil);
 ```
 ###### list all created shipments
 ```bash
-deliveries = Bosta.Delivery.getAllDeliveries();
+deliveries = Bosta::Delivery.getAllDeliveries();
 ```
 ###### get shipment by tracking number
 ```bash
-delivery = Bosta.Delivery.getDeliveryByTrakingNumber(trackingNumber);
+delivery = Bosta::Delivery.getDeliveryByTrakingNumber(trackingNumber);
 ```
 ###### track shipment
 ```bash
-trackingHistory = Bosta.Delivery.trackDelivery(trackingNumber);
+trackingHistory = Bosta::Delivery.trackDelivery(trackingNumber);
 ```
 ###### print airwayBill
 ```bash
-airwayBill = Bosta.Delivery.printDeliveryAWB(deliveryId);
+airwayBill = Bosta::Delivery.printDeliveryAWB(deliveryId);
 ```
 ###### terminate delivery
 ```bash
-Bosta.Delivery.terminateDelivery(deliveryId);
+Bosta::Delivery.terminateDelivery(deliveryId);
 ```
 
 ##### pickups

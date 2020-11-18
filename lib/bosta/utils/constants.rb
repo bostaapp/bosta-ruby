@@ -15,22 +15,10 @@ module Bosta
     #
 
     DELIVERY_TYPES = {
-        :SEND => {
-            :code => 10,
-            :value => "Package Delivery"
-        },
-        :CASH_COLLECTION => {
-            :code => 15,
-            :value => "Cash Collection"
-        },
-        :CRP => {
-            :code => 25,
-            :value => "Customer Return Pickup"
-        },
-        :EXCHANGE => {
-            :code => 30,
-            :value => "Exchange"
-        }
+        :SEND => 10,
+        :CASH_COLLECTION => 15,
+        :CRP => 25,
+        :EXCHANGE => 30
     }
 
     #=== Three different sizes

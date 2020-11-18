@@ -4,24 +4,23 @@ module Bosta
         #=== Create A new pickup
         #* +type+ should be on of DELIVERY_TYPES in Bosta module
         #* +cod+ should be 0 in case delivery type = CRP
-        #* +dropOffAddress+ (required) in case delivery type is SEND or Exchange
+        #* +address+ 
         #* +receiver+ should be of type Receiver
-        #* +pickupAddress+ (required) in case delivery type is Cash Collection or CRP
         #* +specs+ (optinal) should be of type Specs
         #* +businessReference+ (optional) String
         #* +webhookUrl+ (optional) String url
         #* +notes+ String
         #
 
-        def self.create(type, cod, receiver, dropOffAddress=nil, specs=nil, businessReference=nil, webhookUrl=nil, notes=nil, pickupAddress=nil)
+        def self.create(type, cod, receiver, address, specs=nil, businessReference=nil, webhookUrl=nil, notes=nil)
             deliveryHash = {
                 :type => type,
                 :cod => cod,
-                :dropOffAddress => dropOffAddress,
                 :receiver => receiver
             }
-            
-            deliveryHash[:pickupAddress] = pickupAddress unless pickupAddress.nil?
+            forwardTypes = [Bosta::DELIVERY_TYPES[:SEND], Bosta::DELIVERY_TYPES[:EXCHANGE]]
+            deliveryHash[:pickupAddress] = address unless forwardTypes.include? type
+            deliveryHash[:dropOffAddress] = address if forwardTypes.include? type
             deliveryHash[:specs] = specs unless specs.nil?
             deliveryHash[:businessReference] = businessReference unless businessReference.nil?
             deliveryHash[:webhookUrl] = webhookUrl unless webhookUrl.nil?
