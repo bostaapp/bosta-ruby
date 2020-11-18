@@ -1,6 +1,12 @@
 module Bosta
     class Receiver < BostaObject
         attr_accessor :firstName, :lastName, :phone, :email
+
+        #=== Initialize Receiver Object
+        #* +name+
+        #* +phone+ 
+        #* +email+ (optional) String
+        #
         def initialize(name, phone, email=nil)
             namesArr = name.split
             @firstName = namesArr.shift

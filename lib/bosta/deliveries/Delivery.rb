@@ -1,10 +1,10 @@
 module Bosta
     class Delivery 
 
-        #=== Create A new pickup
-        #* +type+ should be on of DELIVERY_TYPES in Bosta module
+        #=== Create new delivery
+        #* +packageType+ should be on of DELIVERY_TYPES in Bosta module
         #* +cod+ should be 0 in case delivery type = CRP
-        #* +address+ 
+        #* +address+ should be of type Address
         #* +receiver+ should be of type Receiver
         #* +specs+ (optinal) should be of type Specs
         #* +businessReference+ (optional) String
@@ -12,45 +12,24 @@ module Bosta
         #* +notes+ String
         #
 
-        def self.create(type, cod, receiver, address, specs=nil, businessReference=nil, webhookUrl=nil, notes=nil)
-            deliveryHash = {
-                :type => type,
-                :cod => cod,
-                :receiver => receiver
-            }
-            forwardTypes = [Bosta::DELIVERY_TYPES[:SEND], Bosta::DELIVERY_TYPES[:EXCHANGE]]
-            deliveryHash[:pickupAddress] = address unless forwardTypes.include? type
-            deliveryHash[:dropOffAddress] = address if forwardTypes.include? type
-            deliveryHash[:specs] = specs unless specs.nil?
-            deliveryHash[:businessReference] = businessReference unless businessReference.nil?
-            deliveryHash[:webhookUrl] = webhookUrl unless webhookUrl.nil?
-            deliveryHash[:notes] = notes unless notes.nil?
-            
+        def self.create(packageType, cod, receiver, address, specs=nil, businessReference=nil, webhookUrl=nil, notes=nil)
+            deliveryHash = Delivery::formatParams(packageType, cod, receiver, address, specs, businessReference, webhookUrl, notes)
+            puts deliveryHash
             Bosta::Resource.send('post', 'deliveries', deliveryHash)
         end
 
-        #=== Edit Delivery
+        #=== Edit delivery data
         #* +deliveryId+
         #* +cod+ (optional) the cash on delivery (number)
-        #* +dropOffAddress+ (optional) should be of type Address
+        #* +address+ should be of type Address
         #* +receiver+ (optional) should be of type Receiver
-        #* +pickupAddress+ (optional) (optinal) should be of type Address
         #* +businessReference+ (optional) String
         #* +webhookUrl+ (optional) String url
         #* +notes+ String
         #
 
-        def self.update(deliveryId, cod=nil, dropOffAddress= nil, receiver = nil, pickupAddress=nil, businessReference=nil, webhookUrl=nil, notes=nil)
-            deliveryHash = {}
-            
-            deliveryHash[:cod] = cod unless cod.nil?
-            deliveryHash[:dropOffAddress] = dropOffAddress unless dropOffAddress.nil?
-            deliveryHash[:receiver] = receiver unless receiver.nil?
-            deliveryHash[:pickupAddress] = pickupAddress unless pickupAddress.nil?
-            deliveryHash[:businessReference] = businessReference unless businessReference.nil?
-            deliveryHash[:webhookUrl] = webhookUrl unless webhookUrl.nil?
-            deliveryHash[:notes] = notes unless notes.nil?
-            
+        def self.update(deliveryId, cod=nil, address= nil, receiver = nil, businessReference=nil, webhookUrl=nil, notes=nil)
+            deliveryHash = Delivery::formatParams(nil, cod, receiver, address, nil, businessReference, webhookUrl, notes)
             Bosta::Resource.send('put', "deliveries/#{deliveryId}", deliveryHash)
         end
 
@@ -92,6 +71,30 @@ module Bosta
 
         def self.terminateDelivery(deliveryId)
             Bosta::Resource.send('delete', "deliveries/#{deliveryId}")
+        end
+
+
+        #:nodoc: all
+        def self.formatParams(packageType=nil, cod=nil, receiver=nil, address=nil, specs=nil, businessReference=nil, webhookUrl=nil, notes=nil)
+            
+            raise 'receiver should be of Class Bosta::Receiver' if !receiver.instance_of?(Bosta::Receiver) && !receiver.nil?
+            raise 'address should be of Class Bosta::Address' if !address.instance_of?(Bosta::Address) && !address.nil?
+            raise 'specs should be of Class Bosta::Specs' if !specs.instance_of?(Bosta::Specs) && !specs.nil?
+            deliveryHash = {}
+            unless (address.nil?) 
+                forwardTypes = [Bosta::DELIVERY_TYPES[:SEND], Bosta::DELIVERY_TYPES[:EXCHANGE]]
+                deliveryHash[:pickupAddress] = address.getFormattedObj unless forwardTypes.include? packageType
+                deliveryHash[:dropOffAddress] = address.getFormattedObj if forwardTypes.include?(packageType)
+            end
+            deliveryHash[:receiver] = receiver.getFormattedObj unless receiver.nil?
+            deliveryHash[:cod] = cod unless cod.nil?
+            deliveryHash[:businessReference] = businessReference unless businessReference.nil?
+            deliveryHash[:webhookUrl] = webhookUrl unless webhookUrl.nil?
+            deliveryHash[:notes] = notes unless notes.nil?
+            deliveryHash[:specs] = specs.getFormattedObj unless specs.nil?
+            deliveryHash[:type] = packageType unless packageType.nil?
+            
+            return deliveryHash
         end
     end
 end

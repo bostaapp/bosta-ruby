@@ -10,11 +10,12 @@ module Bosta
         #
 
         def self.create(businessLocationId, scheduledDate, scheduledTimeSlot, contactPerson, notes=nil)
+            raise 'contactPerson should be of Class Bosta::ContactPerson' if !contactPerson.instance_of?(Bosta::ContactPerson)
             pickupHash = {
                 :businessLocationId => businessLocationId,
                 :scheduledDate => scheduledDate,
                 :scheduledTimeSlot => scheduledTimeSlot,
-                :contactPerson => contactPerson
+                :contactPerson => contactPerson.getFormattedObj
             }
             
             pickupHash[:notes] = notes unless notes.nil?
@@ -32,12 +33,13 @@ module Bosta
         #
 
         def self.update(pickupId, businessLocationId=nil, scheduledDate=nil, scheduledTimeSlot=nil, contactPerson=nil, notes=nil)
+            raise 'contactPerson should be of Class Bosta::ContactPerson' if !contactPerson.instance_of?(Bosta::ContactPerson) && !contactPerson.nil?
             pickupHash = {}
             
             pickupHash[:businessLocationId] = businessLocationId unless businessLocationId.nil?
             pickupHash[:scheduledDate] = scheduledDate unless scheduledDate.nil?
             pickupHash[:scheduledTimeSlot] = scheduledTimeSlot unless scheduledTimeSlot.nil?
-            pickupHash[:contactPerson] = contactPerson unless contactPerson.nil?
+            pickupHash[:contactPerson] = contactPerson.getFormattedObj unless contactPerson.nil?
             pickupHash[:notes] = notes unless notes.nil?
             
             Bosta::Resource.send('put', "pickups/#{pickupId}", pickupHash)

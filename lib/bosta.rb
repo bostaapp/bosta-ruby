@@ -1,15 +1,15 @@
 require_relative('bosta/config.rb')
 require_relative('bosta/resource.rb')
-require_relative('bosta/cities/City.rb')
-require_relative('bosta/zones/Zone.rb')
-require_relative('bosta/deliveries/Delivery.rb')
-require_relative('bosta/pickups/Pickup.rb')
 require_relative('bosta/utils/BostaObject.rb')
 require_relative('bosta/utils/Address.rb')
 require_relative('bosta/utils/Specs.rb')
 require_relative('bosta/utils/Receiver.rb')
 require_relative('bosta/utils/ContactPerson.rb')
 require_relative('bosta/utils/constants.rb')
+require_relative('bosta/cities/City.rb')
+require_relative('bosta/zones/Zone.rb')
+require_relative('bosta/deliveries/Delivery.rb')
+require_relative('bosta/pickups/Pickup.rb')
 
 #= Bosta
 #

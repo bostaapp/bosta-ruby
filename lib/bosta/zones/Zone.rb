@@ -1,14 +1,14 @@
 module Bosta
 
     ##
-    # This class represents the zones that your addresses will contain in creating deliveries and pickps.
+    # This class represents the zones that your addresses will contain in creating deliveries and pickups.
     class Zone
 
         ##
         # Get all zones names.
         #
         # Here you will find all zones that you will need to provide in
-        # creating shipments and pickps.
+        # creating shipments and pickups.
         #
         # An Error is raised if the endpoint didn't return data
 

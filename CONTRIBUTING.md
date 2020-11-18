@@ -1,6 +1,6 @@
 # Contributing
 
-We are open to, and grateful for, any contributions made by the community. By contributing to Bosta Nodejs SDK, you agree to abide by the [code of conduct](https://github.com/bostaapp/bosta-nodejs/blob/master/CODE_OF_CONDUCT.md).
+We are open to, and grateful for, any contributions made by the community. By contributing to Bosta Ruby SDK, you agree to abide by the [code of conduct](https://github.com/bostaapp/bosta-ruby/blob/master/CONTRIBUTING.md).
 
 ### Commit Messages
 
@@ -14,12 +14,6 @@ Commit messages should be verb based, using the following pattern:
 ### Documentation
 
 Please update the [docs](README.md) accordingly so that there are no discrepancies between the API and the documentation.
-
-### Developing
-
-- `npm run test` run the jasmine and mocha tests
-- `npm run build` run webpack and bundle the source
-
 ### Releasing
 
 - **Consider our release cycle** - We try to follow [SemVer v2.0.0](http://semver.org/). Randomly breaking public APIs is not an option.

@@ -1,5 +1,5 @@
 ## Bosta Ruby Package
-The Bosta NodeJs SDK provides convenient access to the Bosta API from applications written in the JavaScript language.
+The Bosta Ruby SDK provides convenient access to the Bosta API from applications written in the Ruby language.
 
 - [Installation](#installation)
 - [Usage](#usage)
@@ -14,7 +14,7 @@ gem install bosta
 
 ## Usage
 
-#### Init Bosta Client
+#### Initiating Bosta Client
 ```bash
 require('bosta');
 
@@ -41,10 +41,10 @@ pickupTimeSlots_2 = Bosta::TIME_SLOT_13_TO_16;
 ##### Shipments
 ###### created shipment
 ```bash
-receiver1 = Bosta::Receiver.new('Ahmad Mohamad', '01029394959').getFormattedObj
-address1 = Bosta::Address.new('EG-01', 'address firstline').getFormattedObj
+receiver1 = Bosta::Receiver.new('Ahmad Mohamad', '01029394959')
+address1 = Bosta::Address.new('EG-01', 'address firstline')
 type = Bosta::DELIVERY_TYPES[:SEND]
-spec = Bosta::Specs.new(Bosta::DELIVERY_SIZES[:SMALL]).getFormattedObj
+spec = Bosta::Specs.new(Bosta::DELIVERY_SIZES[:SMALL])
 createdDelivery = Bosta::Delivery.create(type, 100, receiver1, address1,  spec)
 
 deliveryId = createdDelivery['_id'];
