@@ -2,6 +2,23 @@
 
 We are open to, and grateful for, any contributions made by the community. By contributing to Bosta Ruby SDK, you agree to abide by the [code of conduct](https://github.com/bostaapp/bosta-ruby/blob/master/CONTRIBUTING.md).
 
+
+# Code Style
+
+- Consider the best practices and rules recommended by the
+  [Ruby Community Style Guide](https://github.com/bbatsov/ruby-style-guide).
+- To check style linting run the following command:
+    ```bash
+    gem install rubocop
+
+    rubocop {source_file_or_directory}
+
+    ```
+- You can auto-correct offenses with the following command:
+    ```bash
+     rubocop -a
+    ```
+
 ### Commit Messages
 
 Commit messages should be verb based, using the following pattern:
@@ -14,6 +31,11 @@ Commit messages should be verb based, using the following pattern:
 ### Documentation
 
 Please update the [docs](README.md) accordingly so that there are no discrepancies between the API and the documentation.
+
+### Developing
+
+- `bundle install` install dependencies
+
 ### Releasing
 
 - **Consider our release cycle** - We try to follow [SemVer v2.0.0](http://semver.org/). Randomly breaking public APIs is not an option.
