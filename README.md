@@ -45,14 +45,14 @@ receiver1 = Bosta::Receiver.new('Ahmad Mohamad', '01029394959')
 address1 = Bosta::Address.new('EG-01', 'address firstline')
 type = Bosta::DELIVERY_TYPES[:SEND]
 spec = Bosta::Specs.new(Bosta::DELIVERY_SIZES[:SMALL])
-createdDelivery = Bosta::Delivery.create(type, 100, receiver1, address1,  spec)
+create_delivery = Bosta::Delivery.create(type, 100, receiver1, address1,  spec)
 
-deliveryId = createdDelivery['_id'];
-trackingNumber = createdDelivery['trackingNumber'];
+delivery_id = create_delivery['_id'];
+tracking_number = create_delivery['trackingNumber'];
 ```
 ###### update shipment by id
 ```bash
-updatedDeliver = Bosta::Delivery.update(deliveryId, cod=nil, dropOffAddress= nil, receiver = nil, pickupAddress=nil, businessReference=nil, webhookUrl=nil, notes=nil);
+update_delivery = Bosta::Delivery.update(delivery_id, cod=nil, address= nil, receiver = nil, business_reference=nil, webhook_url=nil, notes=nil);
 ```
 ###### list all created shipments
 ```bash
@@ -60,46 +60,46 @@ deliveries = Bosta::Delivery.find_all_deliveries();
 ```
 ###### get shipment by tracking number
 ```bash
-delivery = Bosta::Delivery.find_delivery_by_traking_number(trackingNumber);
+delivery = Bosta::Delivery.find_delivery_by_traking_number(tracking_number);
 ```
 ###### track shipment
 ```bash
-trackingHistory = Bosta::Delivery.track_delivery(trackingNumber);
+tracking_history = Bosta::Delivery.track_delivery(tracking_number);
 ```
 ###### print airwayBill
 ```bash
-airwayBill = Bosta::Delivery.print_delivery_awb(deliveryId);
+airwayBill = Bosta::Delivery.print_delivery_awb(delivery_id);
 ```
 ###### terminate delivery
 ```bash
-Bosta::Delivery.terminate_delivery(deliveryId);
+Bosta::Delivery.terminate_delivery(delivery_id);
 ```
 
 ##### pickups
 ###### get your pickup location
 ```bash
-pickupLocations = Bosta::Pickup.find_pickup_locations();
-business_location_id = pickupLocations["pickupLocations"][0]['_id'];
+pickup_locations = Bosta::Pickup.find_pickup_locations();
+business_location_id = pickup_locations["pickupLocations"][0]['_id'];
 ```
 ###### create pickup
 ```bash
-createdPickup = Bosta::Pickup.create(business_location_id, scheduled_date, scheduled_time_slot, contact_person);
+create_pickup = Bosta::Pickup.create(business_location_id, scheduled_date, scheduled_time_slot, contact_person);
 ```
 ###### update pickup
 ```bash
-updatedPickup = Bosta::Pickup.update(pickupId, business_location_id=nil, scheduled_date=nil, scheduled_time_slot=nil, contact_person=nil, notes=nil);
+update_pickup = Bosta::Pickup.update(pickup_id, business_location_id=nil, scheduled_date=nil, scheduled_time_slot=nil, contact_person=nil, notes=nil);
 ```
 ###### get all pickups
 ```bash
-pickupRequests = Bosta::Pickup.find_pickups();
+pickup_requests = Bosta::Pickup.find_pickups();
 ```
 ###### get pickup by id
 ```bash
-pikcupRequest = Bosta::Pickup.find_pickup_by_id(pickupId);
+pikcup_request = Bosta::Pickup.find_pickup_by_id(pickup_id);
 ```
 ###### delete pickup
 ```bash
-Bosta::Pickup.delete_pickup(pickupId);
+Bosta::Pickup.delete_pickup(pickup_id);
 ```
 
 ##### cities
@@ -111,7 +111,7 @@ cities = Bosta::City.find_all_cities();
 ##### zones
 ###### get zones of the city by city id to use one of them in the shipment
 ```bash
-zones = Bosta::City.show_city_zones(cityId);
+zones = Bosta::City.show_city_zones(city_id);
 ```
 
 ## Contribution

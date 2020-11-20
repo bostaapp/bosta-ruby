@@ -37,8 +37,8 @@ puts track_order
 #
 puts 'Printing Awb for an order'
 
-# awb = Bosta::Delivery.print_delivery_awb 'f5lrOZgkyq'
-# puts awb
+awb = Bosta::Delivery.print_delivery_awb 'f5lrOZgkyq'
+puts awb
 
 #
 # Terminate shipment +delivery_id+
@@ -48,8 +48,8 @@ puts 'Printing Awb for an order'
 
 puts 'Terminating order'
 
-# terminated_order = Bosta::Delivery.terminate_delivery 'f5lrOZgkyq'
-# puts terminated_order
+terminated_order = Bosta::Delivery.terminate_delivery 'f5lrOZgkyq'
+puts terminated_order
 
 #=== Create new delivery
 # * +packageType+ should be on of DELIVERY_TYPES in Bosta module
